@@ -5,9 +5,4 @@ class Formatter {
     final numberFormat = NumberFormat("#,##,###.##");
     return numberFormat.format(price);
   }
-
-  // String formatDate(DateTime date) {
-  //   // Format the date to "dd MMM yyyy" format
-  //   return DateFormat('dd MMM yyyy').format(date);
-  // }
 }

@@ -98,15 +98,6 @@ class SharedPreferencesHelper {
     return _prefs.getString("influenceremail") ?? "";
   }
 
-  // static void setInfluencerDOB({required String influencerDOB}) {
-  //   if (influencerDOB.isEmpty) {
-  //     return;
-  //   }
-  //   DateTime dob = DateTime.parse(influencerDOB);
-  //   String formattedDOB = formatDate(dob);
-  //   _prefs.setString("influencerdob", formattedDOB);
-  // }
-
   static void setInfluencerDOB({required String influencerDOB}) {
     if (influencerDOB.isEmpty) {
       return;
@@ -259,10 +250,6 @@ class SharedPreferencesHelper {
   static void setHOmePagePageSize(int i) {
     _prefs.setInt("homePagePageSize", i);
   }
-}
-
-enum UserPref {
-  AuthToken,
 }
 
 String formatDate(DateTime date) {

@@ -57,79 +57,6 @@ class ApiRepo {
     }
   }
 
-  Future checkUserExistance(String number) async {
-    dynamic data = {
-      "mobileNumber": number,
-    };
-    try {
-      Response response = await api.sendRequest
-          .get(ApiValue.checkUserURL, queryParameters: data);
-      ApiResponse apiResponse = ApiResponse.fromResponse(response);
-      if (response.statusCode == 200) {
-        if (apiResponse.data[0]['status'] == true) {
-          SharedPreferencesHelper.setInfluencerPhone(influencerPhone: number);
-          SharedPreferencesHelper.setAccessToken(
-              accessToken: apiResponse.data[0]['accessToken']);
-          SharedPreferencesHelper.setInfluencerId(
-              influencerId: apiResponse.data[0]['influencer']['_id']);
-          SharedPreferencesHelper.setInfluencerName(
-              influencerName: apiResponse.data[0]['influencer']['fullName']);
-
-          if (apiResponse.data[0]['influencer'].containsKey('gender')) {
-            SharedPreferencesHelper.setInfluencerGender(
-                influencerGender: apiResponse.data[0]['influencer']['gender']);
-          } else {
-            SharedPreferencesHelper.setInfluencerGender(
-                influencerGender: "Others");
-          }
-
-          SharedPreferencesHelper.setTotalEarning(
-              totalEarning: apiResponse.data[0]['influencer']['totalEarnings']);
-          SharedPreferencesHelper.setIsPartner(
-              isPartner:
-                  apiResponse.data[0]['influencer']['isPartner'].toString());
-          SharedPreferencesHelper.setStoreName(
-              storeName: apiResponse.data[0]['store']['store_name']);
-          SharedPreferencesHelper.setStoreAlies(
-              storeAlies: apiResponse.data[0]['store']['store_alias']);
-          SharedPreferencesHelper.setStoreId(
-              storeId: apiResponse.data[0]['store']['_id']);
-          SharedPreferencesHelper.setStoreBgPic(
-              storeBgPic: apiResponse.data[0]['store']['background_graphics']);
-          SharedPreferencesHelper.setStoreProfilePic(
-              storePic: apiResponse.data[0]['store']['storePictureUrl']);
-          SharedPreferencesHelper.setStoreBio(
-              storeBio: apiResponse.data[0]['store']['store_bio']);
-          SharedPreferencesHelper.setStoreTagline(
-              storeTagline: apiResponse.data[0]['store']['tagline']);
-          SharedPreferencesHelper.setInfluencerDOB(
-              influencerDOB: apiResponse.data[0]['influencer']['dob']);
-          print('uhwbjdcknwnckn');
-          SharedPreferencesHelper.setInfluencerEmail(
-              influencerEmail: apiResponse.data[0]['influencer']['email']);
-          if (apiResponse.data[0]['influencer']['isPartner']) {
-            SharedPreferencesHelper.setPartnerCode(
-                partnerCode: apiResponse.data[0]['influencer']['partnerCode']);
-            SharedPreferencesHelper.setInfluencerCount(
-                influencerCount: apiResponse.data[0]["influencer"]
-                    ['influencerCount']);
-          }
-          SharedPreferencesHelper.setIsLoggedIn(isLoggedIn: true);
-        }
-        return apiResponse.data[0]['status'];
-      }
-    } catch (e) {
-      Fluttertoast.showToast(
-          msg: e.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red[400],
-          textColor: Colors.white,
-          fontSize: 16.0);
-    }
-  }
-
   registerUser(String number, String fullName, String storeName,
       String partnerCode) async {
     dynamic data = {
@@ -894,7 +821,6 @@ class ApiRepo {
       throw "Failed to Create Collection..!";
     }
   }
-
 
   Future<dynamic> addOrRemoveCollectionProduct(
       String collectionId, String productId) async {
