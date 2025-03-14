@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-final List<String> url = [
-  'https://api-v2.buhrata.com/',//==> This is Beta
-  //'https://api.buhrata.com/', //==> This is Prod
-];
+final List<String> url = ['http://192.168.1.4:5000/'];
+
 const int isbeta = 0;
 
 const Map<String, dynamic> defaultHEADERS = {
@@ -37,7 +35,7 @@ class ApiResponse {
   factory ApiResponse.fromResponse(Response response) {
     final data = response.data as Map<String, dynamic>;
     return ApiResponse(
-      success: data["status"],
+      success: data["success"].toString(),
       code: data["code"],
       data: data["data"],
     );

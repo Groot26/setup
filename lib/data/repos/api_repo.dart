@@ -14,6 +14,31 @@ import '../../utils/color_theme.dart';
 class ApiRepo {
   final Api api = Api();
 
+  Future<List<dynamic>> fetchAnimals(int page, int limit) async {
+    Map<String, dynamic> params = {
+      "page": page,
+      "limit": limit,
+    };
+
+    try {
+      Response response = await api.sendRequest.get(
+        '/app/animals/all',
+        queryParameters: params,
+      );
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (apiResponse.success == "true" && apiResponse.data != null) {
+        return apiResponse.data; // Return the raw 'data' field
+      } else {
+        throw Exception("Failed to fetch animals");
+      }
+    } catch (e) {
+      print("Error fetching animals: $e");
+      return [];
+    }
+  }
+
   // Login Flow
   Future sendOtp(String number, String signature) async {
     dynamic data = {

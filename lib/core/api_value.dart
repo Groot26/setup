@@ -1,4 +1,6 @@
 class ApiValue {
+  static const getAllAnimals = "app/animals/all";
+
   static const storeDetailURL = "api/influencer/store-details";
   static const homeCategoryListURL = "api/influencer/categories";
   static const getOtpURL = "api/influencer/send-otp";
@@ -103,6 +105,4 @@ class ApiValue {
   static const getCategoryChain = 'api/influencer/categories/chain';
 //partner stats
   static const fetchPartnerStats = 'api/partner/stats';
-
-
 }
